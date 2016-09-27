@@ -1,0 +1,9 @@
+package Mensajes;
+
+public class Mariano {
+
+	public Mariano() {
+		int aa = 0;
+	}
+
+}
