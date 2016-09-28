@@ -10,5 +10,8 @@ public class Mariano {
 		int wd = 0;
 		int wdwf = 0;
 	}
+	public void abc(){
+		String aa = "aaaaa";
+	}
 
 }
