@@ -1,17 +1,15 @@
 package Servidor;
 
-<<<<<<< HEAD
 import javax.swing.text.Document;
 import javax.xml.transform.Transformer;
-=======
 import java.net.ServerSocket;
 import java.net.Socket;
->>>>>>> branch 'master' of https://github.com/marianolr1/Trabajo-Practico-Autenticaciones.git
+
 
 public class Servidor {
-<<<<<<< HEAD
+
 	public void prueba(){		
-=======
+        }
 	public static void main(String[] args) {
 		new Servidor().iniciar();
 	}
@@ -35,6 +33,6 @@ public class Servidor {
 			e.printStackTrace();
 		}
 		
->>>>>>> branch 'master' of https://github.com/marianolr1/Trabajo-Practico-Autenticaciones.git
+
 	}
 }
