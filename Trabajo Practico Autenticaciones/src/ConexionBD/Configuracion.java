@@ -8,7 +8,8 @@ public class Configuracion {
 	private static Properties propiedades;
 	private Configuracion() {
 		try {
-			 String rutaArchivo = System.getProperty("user.dir")+System.getProperty("file.separator")
+			propiedades=new Properties(); 
+			String rutaArchivo = System.getProperty("user.dir")+System.getProperty("file.separator")
 	         + "configConexion.properties";
 			 FileInputStream is = new FileInputStream(rutaArchivo);
 			 propiedades.load(is);

@@ -14,19 +14,21 @@ public class Conexion {
 	private final String userName;// = "root";
 	private final String password;// = "fasta";
 	
-	private Conexion(String url,String port,String dbName,String userName,String password) {
-		this.url=url;
-		this.port=port;
-		this.dbName=dbName;
-		this.userName=userName;
-		this.password=password;
+	private Conexion(){
+		//(String url,String port,String dbName,String userName,String password) {
+		this.url=Configuracion.getInstance().getProperty("url");
+		this.port=Configuracion.getInstance().getProperty("port");
+		this.dbName=Configuracion.getInstance().getProperty("dbName");
+		this.userName=Configuracion.getInstance().getProperty("userName");
+		this.password=Configuracion.getInstance().getProperty("password");
 		
 		iniciarConexion();
 	}
 	
-	public static Conexion getInstance(String url,String port,String dbName,String name,String password){
+	public static Conexion getInstance(){
+		//(String url,String port,String dbName,String name,String password){
 		if(instancia==null){
-			instancia= new Conexion(url,port,dbName,name,password);
+			instancia= new Conexion();//(url,port,dbName,name,password);
 		}
 		return instancia;
 		
