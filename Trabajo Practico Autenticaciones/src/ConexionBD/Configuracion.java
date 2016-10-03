@@ -5,7 +5,8 @@ import java.util.Properties;
 
 public class Configuracion {
 
-	private static Properties propiedades;
+	private Properties propiedades;
+	private static Configuracion instancia=null;
 	private Configuracion() {
 		try {
 			propiedades=new Properties(); 
@@ -20,11 +21,19 @@ public class Configuracion {
 		
 	}
 	
-	public static final Properties getInstance(){
-		if (propiedades==null) {
-			propiedades=new Configuracion().propiedades;
+	public static Configuracion getInstance(){
+		if (instancia==null) {
+			instancia=new Configuracion();
 		}
+		return instancia;
+	}
+
+	public Properties getPropiedades() {
 		return propiedades;
+	}
+
+	public void setPropiedades(Properties propiedades) {
+		this.propiedades = propiedades;
 	}
 
 }

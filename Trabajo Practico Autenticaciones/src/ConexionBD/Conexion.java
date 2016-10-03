@@ -2,6 +2,7 @@ package ConexionBD;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Properties;
 
 public class Conexion {
 
@@ -13,14 +14,16 @@ public class Conexion {
 	private final String driver = "com.mysql.jdbc.Driver";
 	private final String userName;// = "root";
 	private final String password;// = "fasta";
-	
+	private Configuracion configuracion;
 	private Conexion(){
+		configuracion= Configuracion.getInstance();
+		
 		//(String url,String port,String dbName,String userName,String password) {
-		this.url=Configuracion.getInstance().getProperty("url");
-		this.port=Configuracion.getInstance().getProperty("port");
-		this.dbName=Configuracion.getInstance().getProperty("dbName");
-		this.userName=Configuracion.getInstance().getProperty("userName");
-		this.password=Configuracion.getInstance().getProperty("password");
+		this.url=configuracion.getPropiedades().getProperty("url");
+		this.port=configuracion.getPropiedades().getProperty("port");
+		this.dbName=configuracion.getPropiedades().getProperty("dbName");
+		this.userName=configuracion.getPropiedades().getProperty("userName");
+		this.password=configuracion.getPropiedades().getProperty("password");
 		
 		iniciarConexion();
 	}
