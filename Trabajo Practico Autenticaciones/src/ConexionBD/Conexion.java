@@ -11,7 +11,7 @@ public class Conexion {
 	private final String url;// = "jdbc:mysql://Profe02";//"jdbc:mysql://localhost";
 	private final String port;// ="3306";
 	private final String dbName;// = "test";
-	private final String driver = "com.mysql.jdbc.Driver";
+	private final String driver = "com.mysql.jdbc.Driver";//agregar en config
 	private final String userName;// = "root";
 	private final String password;// = "fasta";
 	private Configuracion configuracion;
