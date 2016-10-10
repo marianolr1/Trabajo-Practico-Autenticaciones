@@ -8,7 +8,7 @@ import java.net.Socket;
 
 public class SocketServidor extends Thread {
 	
-	private final Socket soc;
+	private Socket soc;
 	
 	public SocketServidor (Socket socket) {
 		soc = socket;
