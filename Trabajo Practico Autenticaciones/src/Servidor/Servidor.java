@@ -1,15 +1,13 @@
 package Servidor;
 
-import javax.swing.text.Document;
-import javax.xml.transform.Transformer;
 import java.net.ServerSocket;
 import java.net.Socket;
+
+import ConexionBD.Configuracion;
 
 
 public class Servidor {
 
-	public void prueba(){		
-        }
 	public static void main(String[] args) {
 		new Servidor().iniciar();
 	}
@@ -17,9 +15,11 @@ public class Servidor {
 	public void iniciar(){
 		ServerSocket servidor = null;
 		Socket socket = null;
+		Configuracion configuracion = Configuracion.getInstance();
 		
 		try {
-			servidor = new ServerSocket(5050); //el puerto lo tenemos que levantar del archivo de configuraciones?
+			int puerto =  Integer.parseInt(configuracion.getPropiedades().getProperty("socketport"));
+			servidor = new ServerSocket(puerto);
 			System.out.println("Servidor iniciado - esperando conexiones");
 			while (true) {
 				socket = servidor.accept(); //espera de conexiones
