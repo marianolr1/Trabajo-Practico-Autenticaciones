@@ -1,12 +1,8 @@
 package Broker;
-import Respuesta.Respuesta;;
+import Respuesta.Respuesta;
 
-public abstract class Broker {
+public interface Broker {
 
-	protected String consulta;
-	public Broker() {
-		// TODO Auto-generated constructor stub
-	}
-
+	public abstract boolean claveCorrecta(String passAdmin);
 	public abstract Respuesta consultar();
 }

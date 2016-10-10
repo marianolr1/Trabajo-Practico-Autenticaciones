@@ -1,16 +1,19 @@
 package Mensajes;
 
+import Broker.*;
+
 public class Agregar extends Mensaje {
 	private String usuario;
 	private String password;
 	private String passwordAdmin;
+	private Broker brokerAgregar;
 	
 
 	public Agregar(String usuario, String password, String passwordAdmin) {
 		this.usuario=usuario;
 		this.password=password;
 		this.passwordAdmin=passwordAdmin;
-		// TODO Auto-generated constructor stub
+		this.brokerAgregar=new BrokerAgregar(this);
 	}
 	/*public void agregarUsuario(String usuario,String password,String passwordadmin){
 		
@@ -39,5 +42,12 @@ public class Agregar extends Mensaje {
 	public void setPasswordAdmin(String passwordAdmin) {
 		this.passwordAdmin = passwordAdmin;
 	}
+	public Broker getBrokerAgregar() {
+		return brokerAgregar;
+	}
+	public void setBrokerAgregar(Broker brokerAgregar) {
+		this.brokerAgregar = brokerAgregar;
+	}
 //EndRegion
+	
 }

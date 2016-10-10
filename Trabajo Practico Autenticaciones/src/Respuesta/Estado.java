@@ -5,8 +5,9 @@ public class Estado extends Respuesta {
 	private String estado;
 	private String descripcion;
 	
-	public Estado() {
-		// TODO Auto-generated constructor stub
+	public Estado(String estado, String desc) {
+		this.estado=estado;
+		this.descripcion=desc;
 	}
 //Region - Setters/Getters
 	public String getEstado() {

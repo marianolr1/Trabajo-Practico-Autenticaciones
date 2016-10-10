@@ -11,7 +11,7 @@ public class Conexion {
 	private final String url;// = "jdbc:mysql://Profe02";//"jdbc:mysql://localhost";
 	private final String port;// ="3306";
 	private final String dbName;// = "test";
-	private final String driver = "com.mysql.jdbc.Driver";//agregar en config
+	private final String driver;// = "com.mysql.jdbc.Driver";//agregar en config
 	private final String userName;// = "root";
 	private final String password;// = "fasta";
 	private Configuracion configuracion;
@@ -19,6 +19,7 @@ public class Conexion {
 		configuracion= Configuracion.getInstance();
 		
 		//(String url,String port,String dbName,String userName,String password) {
+		this.driver=configuracion.getPropiedades().getProperty("driver");
 		this.url=configuracion.getPropiedades().getProperty("url");
 		this.port=configuracion.getPropiedades().getProperty("port");
 		this.dbName=configuracion.getPropiedades().getProperty("dbName");
@@ -48,6 +49,14 @@ public class Conexion {
 			System.out.println("Conexión no establecida");
 			e.printStackTrace();
 		}
+	}
+
+	public Connection getConexion() {
+		return conexion;
+	}
+
+	public void setConexion(Connection conexion) {
+		this.conexion = conexion;
 	}
 
 }

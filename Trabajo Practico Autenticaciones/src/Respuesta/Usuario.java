@@ -7,8 +7,9 @@ public class Usuario {
 	private String nombreUsuario;
 	private LocalDate timeStamp;
 	
-	public Usuario() {
-		// TODO Auto-generated constructor stub
+	public Usuario(String nombreUsuario, LocalDate timeStamp) {
+		this.nombreUsuario=nombreUsuario;
+		this.timeStamp=timeStamp;
 	}
 
 //Region - Setters/Getters

@@ -8,8 +8,9 @@ public class Autenticacion {
 	private String host;
 	private LocalDate timeStamp;
 	
-	public Autenticacion() {
-		// TODO Auto-generated constructor stub
+	public Autenticacion(String host,LocalDate timestamp) {
+		this.host=host;
+		this.timeStamp=timestamp;
 	}
 //Region - Setters/Getters
 	

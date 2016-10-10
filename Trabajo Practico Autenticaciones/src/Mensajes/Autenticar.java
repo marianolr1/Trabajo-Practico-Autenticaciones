@@ -1,14 +1,19 @@
 package Mensajes;
 
+import Broker.*;
+
 public class Autenticar extends Mensaje {
 	
 	private String usuario;
 	private String password;
+	private String host;
+	private Broker brokerAutenticar;
 	
 	
 	public Autenticar(String usuario, String password) {
 		this.usuario=usuario;
 		this.password=password;
+		this.brokerAutenticar=new BrokerAutenticar(this);
 		// TODO Auto-generated constructor stub
 	}
 	public void autenticarUsuario(String usuario,String password){
@@ -25,6 +30,18 @@ public class Autenticar extends Mensaje {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getHost() {
+		return host;
+	}
+	public void setHost(String host) {
+		this.host = host;
+	}
+	public Broker getBrokerAutenticar() {
+		return brokerAutenticar;
+	}
+	public void setBrokerAutenticar(Broker brokerAutenticar) {
+		this.brokerAutenticar = brokerAutenticar;
 	}
 
 }

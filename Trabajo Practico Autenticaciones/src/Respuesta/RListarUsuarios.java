@@ -5,8 +5,11 @@ import java.util.LinkedList;
 public class RListarUsuarios extends Respuesta {
 
 	private LinkedList<Usuario> usuarios;
-	public RListarUsuarios() {
-		// TODO Auto-generated constructor stub
+	private String respuesta;
+	
+	public RListarUsuarios(LinkedList<Usuario> lista,String respuesta) {
+		this.usuarios=lista;
+		this.respuesta=respuesta;
 	}
 //Region - Setters/Getters
 	public LinkedList<Usuario> getUsuarios() {
@@ -16,4 +19,10 @@ public class RListarUsuarios extends Respuesta {
 		this.usuarios = usuarios;
 	}
 //EndRegion
+	public String getRespuesta() {
+		return respuesta;
+	}
+	public void setRespuesta(String respuesta) {
+		this.respuesta = respuesta;
+	}
 }
