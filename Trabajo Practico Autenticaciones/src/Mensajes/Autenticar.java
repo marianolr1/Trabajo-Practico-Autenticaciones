@@ -1,6 +1,7 @@
 package Mensajes;
 
 import Broker.*;
+import Respuesta.Respuesta;
 
 public class Autenticar extends Mensaje {
 	
@@ -42,6 +43,11 @@ public class Autenticar extends Mensaje {
 	}
 	public void setBrokerAutenticar(Broker brokerAutenticar) {
 		this.brokerAutenticar = brokerAutenticar;
+	}
+	@Override
+	public Respuesta getRespuesta() {
+		
+		return brokerAutenticar.consultar();
 	}
 
 }

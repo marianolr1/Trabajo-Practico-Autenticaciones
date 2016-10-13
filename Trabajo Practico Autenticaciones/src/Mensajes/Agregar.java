@@ -1,6 +1,7 @@
 package Mensajes;
 
 import Broker.*;
+import Respuesta.Respuesta;
 
 public class Agregar extends Mensaje {
 	private String usuario;
@@ -49,5 +50,10 @@ public class Agregar extends Mensaje {
 		this.brokerAgregar = brokerAgregar;
 	}
 //EndRegion
+	@Override
+	public Respuesta getRespuesta() {
+		// TODO Auto-generated method stub
+		return brokerAgregar.consultar();
+	}
 	
 }
