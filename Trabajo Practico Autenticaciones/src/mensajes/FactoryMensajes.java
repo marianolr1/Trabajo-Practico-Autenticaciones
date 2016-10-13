@@ -1,4 +1,4 @@
-package Mensajes;
+package mensajes;
 
 public class FactoryMensajes {
 	

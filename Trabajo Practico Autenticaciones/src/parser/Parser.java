@@ -8,15 +8,14 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import respuesta.Estado;
+import mensajes.FactoryMensajes;
+import mensajes.Mensaje;
+import respuesta.Respuesta;
 
-import Mensajes.FactoryMensajes;
-import Mensajes.Mensaje;
-import Respuesta.Estado;
-import Respuesta.Respuesta;
 
 
 public class Parser {
@@ -89,13 +88,18 @@ public class Parser {
                     	return new Estado("ERROR","Contraseña vacia");
 					break;
 				case "ADM-PASS":
-					passwordAdmin = listaNodos.item(i).getTextContent();
+					texto = listaNodos.item(i).getTextContent();
+					if(!texto.equals(""))
+						passwordAdmin = texto;
+                    else
+                    	return new Estado("ERROR","Contraseña administrador vacia");
 					break;
 				case "NEW-PASS":
                     texto = listaNodos.item(i).getTextContent();
                     if(!texto.equals(""))
                     	passwordNuevo = texto;
-	
+                    else
+                    	return new Estado("ERROR","Contraseña nueva vacia");
 					break;
 				default:
 					System.err.println("Etiqueta erronea o desconocida");

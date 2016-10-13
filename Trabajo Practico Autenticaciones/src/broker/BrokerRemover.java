@@ -1,26 +1,26 @@
-package Broker;
+package broker;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import ConexionBD.Conexion;
-import Mensajes.Modificar;
-import Respuesta.Estado;
-import Respuesta.Respuesta;
+import conexionBD.Conexion;
+import mensajes.*;
+import respuesta.Estado;
+import respuesta.Respuesta;
 
-public class BrokerModificar implements Broker {
+public class BrokerRemover implements Broker {
 	
 	private String consulta="";
-	private Modificar mensaje=null;
+	private Remover mensaje=null;
 	private Conexion conexion;
 
-	public BrokerModificar(Modificar mensaje) {
+	public BrokerRemover(Remover mensaje) {
 		this.mensaje=mensaje;
 		conexion=Conexion.getInstance();
-		if (claveCorrecta(mensaje.getPassword())) {
-			this.consulta="update usuarios "
-					+ "set password=? where username=? and password=?";
+		if (claveCorrecta(mensaje.getPasswordAdmin())) {
+			this.consulta="delete from usuarios "
+					+ "where username=?";
 		}
 	}
 
@@ -34,18 +34,16 @@ public class BrokerModificar implements Broker {
 			if (this.consulta!="") {
 				conexion.getConexion().setAutoCommit(false);
 				PreparedStatement statement=conexion.getConexion().prepareStatement(consulta);
-				statement.setString(1,mensaje.getPasswordNuevo());
-				statement.setString(2,mensaje.getUsuario());
-				statement.setString(3,mensaje.getPassword());
+				statement.setString(1,mensaje.getUsuario());
 				rs=statement.executeUpdate();
 				conexion.getConexion().setAutoCommit(true);
 				if (rs!=0) {
 					estado="OK";
-					desc="Clave modificada con exito";
+					desc="Usuario eliminado";
 				}	
 			}else {
 				estado="ERROR";
-				desc="Usuario o clave incorrecta";
+				desc="Clave incorrecta";
 			}
 			} catch (Exception e) {
 				estado="ERROR";
@@ -58,21 +56,18 @@ public class BrokerModificar implements Broker {
 
 	@Override
 	public boolean claveCorrecta(String passAdmin) {
-		String consulta="select password from usuarios where username=?";
+		String consulta="select password from usuarios where isadmin=1";
 		String pass="";
 		ResultSet rs;
 		try {
 			conexion.getConexion().setAutoCommit(false);
 			
 			PreparedStatement statement=conexion.getConexion().prepareStatement(consulta);
-			statement.setString(1,mensaje.getUsuario());
 			rs=statement.executeQuery();
 			pass=rs.getString(1);
-			
-			
 			conexion.getConexion().setAutoCommit(true);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return pass==passAdmin;

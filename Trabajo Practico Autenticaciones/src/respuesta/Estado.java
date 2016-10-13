@@ -1,4 +1,4 @@
-package Respuesta;
+package respuesta;
 
 public class Estado extends Respuesta {
 

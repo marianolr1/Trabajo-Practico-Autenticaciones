@@ -1,12 +1,11 @@
-package Broker;
+package broker;
 
-import Mensajes.*;
-import Respuesta.*;
+import conexionBD.Conexion;
+import mensajes.*;
+import respuesta.*;
 
 import java.sql.*;
 import java.time.LocalDate;
-
-import ConexionBD.Conexion;
 
 public class BrokerAgregar implements Broker {
 	private String consulta="";
