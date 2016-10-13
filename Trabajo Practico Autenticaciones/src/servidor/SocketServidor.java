@@ -28,12 +28,13 @@ public class SocketServidor extends Thread {
                
 		try {
 			in = new BufferedReader(new InputStreamReader(soc.getInputStream())); ///recupero xml
-			System.out.println("Mensaje recibido: "+in.readLine());
+			String mensajeEntrada=in.readLine();
+			System.out.println("Mensaje recibido: "+mensajeEntrada);
 			
-			if (!in.readLine().isEmpty()){
+			if (!mensajeEntrada.isEmpty()){
 				String host = soc.getRemoteSocketAddress().toString();
 				Parser parser = new Parser();
-				Document docEnvia = parser.xmlToDoc(in.toString());
+				Document docEnvia = parser.xmlToDoc(mensajeEntrada);
 				Document docRecibe = parser.analizaXml(docEnvia,host);
 				String respuestaXml = parser.docToXml(docRecibe);
 				out = new PrintWriter(soc.getOutputStream(), true);
