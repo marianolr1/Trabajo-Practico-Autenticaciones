@@ -12,8 +12,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import respuesta.Estado;
+import mensajes.Agregar;
+import mensajes.Autenticar;
 import mensajes.FactoryMensajes;
+import mensajes.MListarAutenticaciones;
+import mensajes.MListarUsuarios;
 import mensajes.Mensaje;
+import mensajes.Modificar;
+import mensajes.Remover;
 import respuesta.Respuesta;
 
 
@@ -115,6 +121,22 @@ public class Parser {
         
         //falta ver que hacer con el mensaje
 		return mensaje.getRespuesta();
+	}
+	
+	public Document generarRespuesta(Respuesta respuesta,String tipo){
+		switch (tipo) {
+        case "LIST-USERS":
+            //mensaje = new MListarUsuarios(passwordAdmin);
+            break;
+        case "LIST-AUT":
+            //mensaje = new MListarAutenticaciones(passwordAdmin, usuario);
+            break;
+        default:
+            System.err.println("Tipo de mensaje no reconocido");
+            break;
+		}
+		
+		return null;
 	}
 
 }
