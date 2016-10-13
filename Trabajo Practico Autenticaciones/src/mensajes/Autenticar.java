@@ -11,10 +11,11 @@ public class Autenticar extends Mensaje {
 	private Broker brokerAutenticar;
 	
 	
-	public Autenticar(String usuario, String password) {
+	public Autenticar(String usuario, String password,String host) {
 		this.usuario=usuario;
 		this.password=password;
 		this.brokerAutenticar=new BrokerAutenticar(this);
+		this.host=host;
 		// TODO Auto-generated constructor stub
 	}
 	public void autenticarUsuario(String usuario,String password){

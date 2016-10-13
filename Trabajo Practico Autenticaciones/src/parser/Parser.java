@@ -58,7 +58,7 @@ public class Parser {
 		return sw.toString();
 	}
 	// recupero todos los datos necesarios para crear un mensaje del documento xml
-	public Respuesta analizaXml(Document doc){
+	public Respuesta analizaXml(Document doc,String host){
 		String tipo = null;
         String usuario = null;
         String password = null;
@@ -105,7 +105,7 @@ public class Parser {
         	e.printStackTrace();
         }
         factoryMje = new FactoryMensajes();
-        Mensaje mensaje = factoryMje.crearMensaje(tipo, usuario, password, passwordAdmin, passwordNuevo);
+        Mensaje mensaje = factoryMje.crearMensaje(tipo, usuario, password, passwordAdmin, passwordNuevo,host);
         
         //falta ver que hacer con el mensaje
 		return null;

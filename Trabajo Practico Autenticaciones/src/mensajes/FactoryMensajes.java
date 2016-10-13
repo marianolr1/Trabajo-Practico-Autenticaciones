@@ -6,7 +6,7 @@ public class FactoryMensajes {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Mensaje crearMensaje(String tipo, String usuario, String password, String passwordAdmin, String passwordNuevo){
+	public Mensaje crearMensaje(String tipo, String usuario, String password, String passwordAdmin, String passwordNuevo,String host){
 		Mensaje mensaje = null;
 	       
 	       switch(tipo){
@@ -20,7 +20,7 @@ public class FactoryMensajes {
 	                mensaje = new Modificar(usuario,password,passwordNuevo);
 	                break;
 	            case "AUTHENTICATE":
-	                mensaje = new Autenticar(usuario,password);
+	                mensaje = new Autenticar(usuario,password,host);
 	                break;
 	            case "LIST-USERS":
 	                mensaje = new MListarUsuarios(passwordAdmin);
