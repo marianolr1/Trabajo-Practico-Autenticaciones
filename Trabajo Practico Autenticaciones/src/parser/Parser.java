@@ -3,7 +3,6 @@ package parser;
 import java.io.StringReader;
 import java.io.StringWriter;
 
-import javax.xml.crypto.dsig.CanonicalizationMethod;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.*;
@@ -16,6 +15,7 @@ import org.xml.sax.InputSource;
 
 import Mensajes.FactoryMensajes;
 import Mensajes.Mensaje;
+import Respuesta.Estado;
 import Respuesta.Respuesta;
 
 
@@ -78,16 +78,18 @@ public class Parser {
 					texto = listaNodos.item(i).getTextContent(); //recupera el contenido de la etiqueta
                     if(!texto.equals(""))
                     	usuario = texto;
+                    else
+                    	return new Estado("ERROR","Nombre de Usuario vacio"); 
 					break;
 				case "PASSWORD":
                     texto = listaNodos.item(i).getTextContent();
                     if(!texto.equals(""))
                         password = texto;
-					
+                    else
+                    	return new Estado("ERROR","Contraseña vacia");
 					break;
 				case "ADM-PASS":
 					passwordAdmin = listaNodos.item(i).getTextContent();
-					
 					break;
 				case "NEW-PASS":
                     texto = listaNodos.item(i).getTextContent();
@@ -108,7 +110,7 @@ public class Parser {
         Mensaje mensaje = factoryMje.crearMensaje(tipo, usuario, password, passwordAdmin, passwordNuevo);
         
         //falta ver que hacer con el mensaje
-		return null;
+		return mensaje.getRespuesta();
 	}
 
 }
