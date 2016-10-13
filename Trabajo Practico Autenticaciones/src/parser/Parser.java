@@ -3,20 +3,19 @@ package parser;
 import java.io.StringReader;
 import java.io.StringWriter;
 
-import javax.xml.crypto.dsig.CanonicalizationMethod;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-
+import respuesta.Estado;
 import mensajes.FactoryMensajes;
 import mensajes.Mensaje;
 import respuesta.Respuesta;
+
 
 
 public class Parser {
@@ -78,22 +77,29 @@ public class Parser {
 					texto = listaNodos.item(i).getTextContent(); //recupera el contenido de la etiqueta
                     if(!texto.equals(""))
                     	usuario = texto;
+                    else
+                    	return new Estado("ERROR","Nombre de Usuario vacio"); 
 					break;
 				case "PASSWORD":
                     texto = listaNodos.item(i).getTextContent();
                     if(!texto.equals(""))
                         password = texto;
-					
+                    else
+                    	return new Estado("ERROR","Contraseña vacia");
 					break;
 				case "ADM-PASS":
-					passwordAdmin = listaNodos.item(i).getTextContent();
-					
+					texto = listaNodos.item(i).getTextContent();
+					if(!texto.equals(""))
+						passwordAdmin = texto;
+                    else
+                    	return new Estado("ERROR","Contraseña administrador vacia");
 					break;
 				case "NEW-PASS":
                     texto = listaNodos.item(i).getTextContent();
                     if(!texto.equals(""))
                     	passwordNuevo = texto;
-	
+                    else
+                    	return new Estado("ERROR","Contraseña nueva vacia");
 					break;
 				default:
 					System.err.println("Etiqueta erronea o desconocida");
@@ -108,7 +114,7 @@ public class Parser {
         Mensaje mensaje = factoryMje.crearMensaje(tipo, usuario, password, passwordAdmin, passwordNuevo,host);
         
         //falta ver que hacer con el mensaje
-		return null;
+		return mensaje.getRespuesta();
 	}
 
 }
