@@ -5,10 +5,12 @@ import java.io.StringWriter;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import respuesta.Estado;
@@ -63,7 +65,7 @@ public class Parser {
 		return sw.toString();
 	}
 	// recupero todos los datos necesarios para crear un mensaje del documento xml
-	public Respuesta analizaXml(Document doc,String host){
+	public Document analizaXml(Document doc,String host){
 		String tipo = null;
         String usuario = null;
         String password = null;
@@ -76,36 +78,44 @@ public class Parser {
         	tipo = doc.getDocumentElement().getAttribute("TYPE");
         	NodeList listaNodos = doc.getDocumentElement().getChildNodes(); //reculero todos los nodos(etiquetas)
         	int cantNodos = listaNodos.getLength(); //cantidad de nodos
-
+        	Respuesta respuesta= null;
         	for (int i = 0; i < cantNodos; i++) {
 				switch (listaNodos.item(i).getNodeName()) {
 				case "USERNAME":
 					texto = listaNodos.item(i).getTextContent(); //recupera el contenido de la etiqueta
                     if(!texto.equals(""))
                     	usuario = texto;
-                    else
-                    	return new Estado("ERROR","Nombre de Usuario vacio"); 
+                    else{
+                    	respuesta=new Estado("ERROR","Nombre de Usuario vacio"); 
+                    	return generarRespuesta(respuesta,tipo);
+                    }
 					break;
 				case "PASSWORD":
                     texto = listaNodos.item(i).getTextContent();
                     if(!texto.equals(""))
                         password = texto;
-                    else
-                    	return new Estado("ERROR","Contraseña vacia");
+                    else{
+                    	respuesta=new Estado("ERROR","Contraseña vacia");
+                    	return generarRespuesta(respuesta,tipo);
+                    }
 					break;
 				case "ADM-PASS":
 					texto = listaNodos.item(i).getTextContent();
 					if(!texto.equals(""))
 						passwordAdmin = texto;
-                    else
-                    	return new Estado("ERROR","Contraseña administrador vacia");
+                    else{
+                    	respuesta=new Estado("ERROR","Contraseña administrador vacia");
+                    	return generarRespuesta(respuesta,tipo);
+                    } 
 					break;
 				case "NEW-PASS":
                     texto = listaNodos.item(i).getTextContent();
                     if(!texto.equals(""))
                     	passwordNuevo = texto;
-                    else
-                    	return new Estado("ERROR","Contraseña nueva vacia");
+                    else{
+                    	respuesta=new Estado("ERROR","Contraseña nueva vacia");
+                    	return generarRespuesta(respuesta,tipo);
+                    }
 					break;
 				default:
 					System.err.println("Etiqueta erronea o desconocida");
@@ -120,10 +130,12 @@ public class Parser {
         Mensaje mensaje = factoryMje.crearMensaje(tipo, usuario, password, passwordAdmin, passwordNuevo,host);
         
         //falta ver que hacer con el mensaje
-		return mensaje.getRespuesta();
+		return generarRespuesta(mensaje.getRespuesta(),tipo);
 	}
 	
 	public Document generarRespuesta(Respuesta respuesta,String tipo){
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		Document doc = null;
 		switch (tipo) {
         case "LIST-USERS":
             //mensaje = new MListarUsuarios(passwordAdmin);
@@ -132,8 +144,23 @@ public class Parser {
             //mensaje = new MListarAutenticaciones(passwordAdmin, usuario);
             break;
         default:
-            System.err.println("Tipo de mensaje no reconocido");
-            break;
+        	try {
+        		Estado estado=(Estado) respuesta;
+				doc=factory.newDocumentBuilder().newDocument();
+				Element resEstado = doc.createElement("ACK");
+				resEstado.setAttribute("STATUS", estado.getEstado());
+				Element descripcion=doc.createElement("DESC");
+				descripcion.setTextContent(estado.getDescripcion());
+				
+				resEstado.appendChild(descripcion);
+				doc.appendChild(resEstado);
+				
+				
+			} catch (ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	return doc;
 		}
 		
 		return null;
