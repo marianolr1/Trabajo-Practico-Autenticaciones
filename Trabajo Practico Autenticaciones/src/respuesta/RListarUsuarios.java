@@ -1,4 +1,4 @@
-package Respuesta;
+package respuesta;
 
 import java.util.LinkedList;
 

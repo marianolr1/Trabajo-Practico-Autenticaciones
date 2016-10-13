@@ -1,72 +1,71 @@
-package Broker;
+package broker;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
 
-import ConexionBD.Conexion;
-import Mensajes.*;
-import Respuesta.*;
+import conexionBD.Conexion;
+import mensajes.Modificar;
+import respuesta.Estado;
+import respuesta.Respuesta;
 
-public class BrokerListUsu implements Broker {
+public class BrokerModificar implements Broker {
 	
 	private String consulta="";
-	private MListarUsuarios mensaje=null;
+	private Modificar mensaje=null;
 	private Conexion conexion;
 
-	public BrokerListUsu(MListarUsuarios mensaje) {
+	public BrokerModificar(Modificar mensaje) {
 		this.mensaje=mensaje;
 		conexion=Conexion.getInstance();
-		if (claveCorrecta(this.mensaje.getPasswordAdmin())) {
-			this.consulta="select username,timestamp from usuarios";
+		if (claveCorrecta(mensaje.getPassword())) {
+			this.consulta="update usuarios "
+					+ "set password=? where username=? and password=?";
 		}
 	}
 
 	@Override
 	public Respuesta consultar() {
-		RListarUsuarios respuesta=null;
-		LinkedList<Usuario> lista=new LinkedList<Usuario> ();
-		String res="Clave incorrecta";
-		Usuario usuario=null;
-		
-		ResultSet rs=null;
+		Estado respuesta=null;
+		String desc="";
+		String estado="ERROR";
+		int rs=0;
 		try {
 			if (this.consulta!="") {
 				conexion.getConexion().setAutoCommit(false);
 				PreparedStatement statement=conexion.getConexion().prepareStatement(consulta);
-				rs=statement.executeQuery();
+				statement.setString(1,mensaje.getPasswordNuevo());
+				statement.setString(2,mensaje.getUsuario());
+				statement.setString(3,mensaje.getPassword());
+				rs=statement.executeUpdate();
 				conexion.getConexion().setAutoCommit(true);
-				if (!rs.next()) {
-					res="No hay usuarios";
-				}else {
-					rs.previous();
-					while (rs.next()) {
-						usuario=new Usuario(rs.getString(1),(rs.getDate(2).toLocalDate()));
-						lista.add(usuario);
-					}
-					res="OK";
+				if (rs!=0) {
+					estado="OK";
+					desc="Clave modificada con exito";
 				}	
 			}else {
-				
+				estado="ERROR";
+				desc="Usuario o clave incorrecta";
 			}
 			} catch (Exception e) {
-				res="Error de conexion";
+				estado="ERROR";
+				desc="Error de conexion";
 		}
-		respuesta=new RListarUsuarios(lista,res);
+		respuesta=new Estado(estado,desc);
 	
 		return respuesta;
 	}
 
 	@Override
 	public boolean claveCorrecta(String passAdmin) {
-		String consulta="select password from usuarios where isadmin=1";
+		String consulta="select password from usuarios where username=?";
 		String pass="";
 		ResultSet rs;
 		try {
 			conexion.getConexion().setAutoCommit(false);
 			
 			PreparedStatement statement=conexion.getConexion().prepareStatement(consulta);
+			statement.setString(1,mensaje.getUsuario());
 			rs=statement.executeQuery();
 			pass=rs.getString(1);
 			

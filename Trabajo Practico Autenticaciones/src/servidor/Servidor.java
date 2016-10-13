@@ -1,9 +1,9 @@
-package Servidor;
+package servidor;
 
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import ConexionBD.Configuracion;
+import conexionBD.Configuracion;
 
 
 public class Servidor {

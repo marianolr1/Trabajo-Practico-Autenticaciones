@@ -1,5 +1,5 @@
-package Broker;
-import Respuesta.Respuesta;
+package broker;
+import respuesta.Respuesta;
 
 public interface Broker {
 

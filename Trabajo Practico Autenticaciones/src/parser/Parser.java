@@ -14,9 +14,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import Mensajes.FactoryMensajes;
-import Mensajes.Mensaje;
-import Respuesta.Respuesta;
+import mensajes.FactoryMensajes;
+import mensajes.Mensaje;
+import respuesta.Respuesta;
 
 
 public class Parser {

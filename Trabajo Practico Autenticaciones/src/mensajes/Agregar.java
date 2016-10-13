@@ -1,7 +1,7 @@
-package Mensajes;
+package mensajes;
 
-import Broker.*;
-import Respuesta.Respuesta;
+import broker.*;
+import respuesta.Respuesta;
 
 public class Agregar extends Mensaje {
 	private String usuario;

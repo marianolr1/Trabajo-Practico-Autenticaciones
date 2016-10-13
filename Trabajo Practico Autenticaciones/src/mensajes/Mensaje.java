@@ -1,6 +1,6 @@
-package Mensajes;
+package mensajes;
 
-import Respuesta.Respuesta;
+import respuesta.Respuesta;
 
 public abstract class Mensaje {
 
