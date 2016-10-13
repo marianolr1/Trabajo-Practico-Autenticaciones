@@ -6,6 +6,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import org.w3c.dom.Document;
+
+import parser.Parser;
+import respuesta.Respuesta;
+
 public class SocketServidor extends Thread {
 	
 	private Socket soc;
@@ -25,15 +30,16 @@ public class SocketServidor extends Thread {
 			in = new BufferedReader(new InputStreamReader(soc.getInputStream())); ///recupero xml
 			System.out.println("Mensaje recibido: "+in.readLine());
 			
-			//este bloque muestra todas las lineas del mensaje enviado, si es que no lo mandan en una sola linea, preguntar como se van a enviar los mjes
-			/*String linea = in.readLine();
-			while(linea!=null){
-				System.out.println(linea);
-				linea=in.readLine();		
-				}*/
+			if (!in.readLine().isEmpty()){
+				String host = soc.getRemoteSocketAddress().toString();
+				Parser parser = new Parser();
+				Document docEnvia = parser.xmlToDoc(in.toString());
+				Document docRecibe = parser.analizaXml(docEnvia,host);
+				String respuestaXml = parser.docToXml(docRecibe);
+				out = new PrintWriter(soc.getOutputStream(), true);
+				out.println(respuestaXml);
+			}
 			
-			out = new PrintWriter(soc.getOutputStream(), true);
-			out.println("Hola Estimado cliente");// va el xml de salida
 		
 		}catch (IOException e) {
 			//e.printStackTrace(); //cuando cierro el cliente da error de cliente reset capas que no va esta linea
