@@ -15,7 +15,8 @@ public class BrokerAgregar implements Broker {
 	public BrokerAgregar(Agregar mensaje) {
 		this.mensaje=mensaje;
 		conexion=Conexion.getInstance();
-		if (claveCorrecta(mensaje.getPasswordAdmin())) {
+		boolean tru=claveCorrecta(mensaje.getPasswordAdmin());
+		if (tru) {
 			this.consulta="insert into usuarios (`username`, `password`,`timestamp`, `isadmin`) values(?,?,now(),0)";
 		}
 		
@@ -36,7 +37,7 @@ public class BrokerAgregar implements Broker {
 				PreparedStatement statement=conexion.getConexion().prepareStatement(consulta);
 				statement.setString(1,mensaje.getUsuario());
 				statement.setString(2,mensaje.getPassword());
-				statement.setDate(3, Date.valueOf(LocalDate.now()));
+				
 				
 				resultado=statement.executeUpdate();
 				conexion.getConexion().setAutoCommit(true);
@@ -69,7 +70,10 @@ public class BrokerAgregar implements Broker {
 			
 			PreparedStatement statement=conexion.getConexion().prepareStatement(consulta);
 			rs=statement.executeQuery();
-			pass=rs.getString(1);
+			if (!rs.next()){
+                System.out.println("no hay registros");
+			}
+			pass=rs.getString("password");
 			
 			
 			conexion.getConexion().setAutoCommit(true);
@@ -77,7 +81,7 @@ public class BrokerAgregar implements Broker {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return pass==passAdmin;
+		return pass.equals(passAdmin);
 	}
 
 }

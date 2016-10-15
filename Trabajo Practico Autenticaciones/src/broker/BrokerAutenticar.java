@@ -49,6 +49,7 @@ public class BrokerAutenticar implements Broker {
 			}
 			} catch (Exception e) {
 				estado="ERROR";
+				e.printStackTrace();
 				desc="Error de conexion";
 		}
 		respuesta=new Estado(estado,desc);
@@ -67,6 +68,9 @@ public class BrokerAutenticar implements Broker {
 			PreparedStatement statement=conexion.getConexion().prepareStatement(consulta);
 			statement.setString(1,mensaje.getUsuario());
 			rs=statement.executeQuery();
+			if (!rs.next()){
+                System.out.println("no hay registros");
+			}
 			pass=rs.getString(1);
 			
 			
@@ -75,7 +79,7 @@ public class BrokerAutenticar implements Broker {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return pass==passAdmin;
+		return pass.equals(passAdmin);
 	}
 
 }

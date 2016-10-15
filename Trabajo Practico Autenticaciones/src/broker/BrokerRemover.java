@@ -64,13 +64,16 @@ public class BrokerRemover implements Broker {
 			
 			PreparedStatement statement=conexion.getConexion().prepareStatement(consulta);
 			rs=statement.executeQuery();
+			if (!rs.next()){
+                System.out.println("no hay registros");
+			}
 			pass=rs.getString(1);
 			conexion.getConexion().setAutoCommit(true);
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}
-		return pass==passAdmin;
+		return pass.equals(passAdmin);
 	}
 
 }

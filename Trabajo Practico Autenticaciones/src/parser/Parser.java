@@ -2,6 +2,7 @@ package parser;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.LinkedList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,7 +14,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import respuesta.Estado;
+import respuesta.*;
 import mensajes.Agregar;
 import mensajes.Autenticar;
 import mensajes.FactoryMensajes;
@@ -138,22 +139,27 @@ public class Parser {
 		Document doc = null;
 		switch (tipo) {
         case "LIST-USERS":
-            //mensaje = new MListarUsuarios(passwordAdmin);
-            break;
-        case "LIST-AUT":
-            //mensaje = new MListarAutenticaciones(passwordAdmin, usuario);
-            break;
-        default:
         	try {
-        		Estado estado=(Estado) respuesta;
+        		RListarUsuarios resListUsu=(RListarUsuarios) respuesta;
 				doc=factory.newDocumentBuilder().newDocument();
-				Element resEstado = doc.createElement("ACK");
-				resEstado.setAttribute("STATUS", estado.getEstado());
-				Element descripcion=doc.createElement("DESC");
-				descripcion.setTextContent(estado.getDescripcion());
-				
-				resEstado.appendChild(descripcion);
-				doc.appendChild(resEstado);
+				Element element = doc.createElement("LIST-USERS");
+				LinkedList<Usuario> lista=resListUsu.getUsuarios();
+				if (!lista.isEmpty()) {
+					 for(Usuario user : lista){
+			                Element usuario = doc.createElement("USER");
+			                Element username = doc.createElement("USERNAME");
+			                username.setTextContent(user.getNombreUsuario());
+			                Element timestamp = doc.createElement("TIMESTAMP");
+			                timestamp.setTextContent(user.getTimeStamp().toString());
+			                usuario.appendChild(username);
+			                usuario.appendChild(timestamp);
+			                element.appendChild(usuario);                
+			         }
+				}else {
+					doc=respuestaEstado("ERROR",resListUsu.getRespuesta());
+					return doc;
+				}
+				doc.appendChild(element);
 				
 				
 			} catch (ParserConfigurationException e) {
@@ -161,9 +167,64 @@ public class Parser {
 				e.printStackTrace();
 			}
         	return doc;
+            
+        case "LIST-AUT":
+            try {
+            	RListarAutenticaciones resListAut=(RListarAutenticaciones) respuesta;
+				doc=factory.newDocumentBuilder().newDocument();
+				Element element = doc.createElement("LIST-USERS");
+				LinkedList<Autenticacion> lista=resListAut.getAutenticaciones();
+				if (!lista.isEmpty()) {
+					 for(Autenticacion aut : lista){
+			                Element autenticacion = doc.createElement("AUT");
+			                Element host = doc.createElement("HOST");
+			                host.setTextContent(aut.getHost());
+			                Element timestamp = doc.createElement("TIMESTAMP");
+			                timestamp.setTextContent(aut.getTimeStamp().toString());
+			                autenticacion.appendChild(host);
+			                autenticacion.appendChild(timestamp);
+			                element.appendChild(autenticacion);                
+			         }
+				}else {
+					doc=respuestaEstado("ERROR",resListAut.getRespuesta());
+					return doc;
+				}
+				doc.appendChild(element); 
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+            return doc;
+        default:
+        	
+        	Estado estado=(Estado) respuesta;
+			doc=respuestaEstado(estado.getEstado(),estado.getDescripcion());	
+			
+        	return doc;
 		}
 		
-		return null;
+	}
+	
+	public Document respuestaEstado(String est,String desc){
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		Document doc = null;
+		Estado estado=new Estado(est,desc);
+		try {
+    		
+			doc=factory.newDocumentBuilder().newDocument();
+			Element resEstado = doc.createElement("ACK");
+			resEstado.setAttribute("STATUS", estado.getEstado());
+			Element descripcion=doc.createElement("DESC");
+			descripcion.setTextContent(estado.getDescripcion());
+			
+			resEstado.appendChild(descripcion);
+			doc.appendChild(resEstado);
+			
+			
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return doc;
 	}
 
 }

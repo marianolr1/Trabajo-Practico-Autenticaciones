@@ -3,6 +3,7 @@ package broker;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.LinkedList;
 
 import conexionBD.Conexion;
@@ -19,7 +20,7 @@ public class BrokerListUsu implements Broker {
 		this.mensaje=mensaje;
 		conexion=Conexion.getInstance();
 		if (claveCorrecta(this.mensaje.getPasswordAdmin())) {
-			this.consulta="select username,timestamp from usuarios";
+			this.consulta="select username,ifnull(timestamp,now()) as timestamp  from usuarios";
 		}
 	}
 
@@ -42,7 +43,7 @@ public class BrokerListUsu implements Broker {
 				}else {
 					rs.previous();
 					while (rs.next()) {
-						usuario=new Usuario(rs.getString(1),(rs.getDate(2).toLocalDate()));
+						usuario=new Usuario(rs.getString(1),rs.getDate(2).toLocalDate());
 						lista.add(usuario);
 					}
 					res="OK";
@@ -51,6 +52,7 @@ public class BrokerListUsu implements Broker {
 				
 			}
 			} catch (Exception e) {
+				e.printStackTrace();
 				res="Error de conexion";
 		}
 		respuesta=new RListarUsuarios(lista,res);
@@ -68,6 +70,9 @@ public class BrokerListUsu implements Broker {
 			
 			PreparedStatement statement=conexion.getConexion().prepareStatement(consulta);
 			rs=statement.executeQuery();
+			if (!rs.next()){
+                System.out.println("no hay registros");
+			}
 			pass=rs.getString(1);
 			
 			
@@ -76,7 +81,7 @@ public class BrokerListUsu implements Broker {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return pass==passAdmin;
+		return pass.equals(passAdmin);
 	}
 
 }

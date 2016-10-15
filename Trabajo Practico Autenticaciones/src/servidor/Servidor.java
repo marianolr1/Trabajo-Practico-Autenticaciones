@@ -23,7 +23,7 @@ public class Servidor {
 			System.out.println("Servidor iniciado - esperando conexiones");
 			while (true) {
 				socket = servidor.accept(); //espera de conexiones
-				System.out.println("Conexión desde ip: "+socket.getInetAddress()); // ver de sacarle la "/" del principio de la ip
+				System.out.println("Conexión desde ip: "+socket.getInetAddress().toString().substring(1)); // ver de sacarle la "/" del principio de la ip
 				
 				new SocketServidor (socket); //se envia la conexión entrante para generacion de thread
 

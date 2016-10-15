@@ -18,8 +18,8 @@ public class BrokerListAut implements Broker {
 	public BrokerListAut(MListarAutenticaciones mensaje) {
 		this.mensaje=mensaje;
 		conexion=Conexion.getInstance();
-		if (claveCorrecta(mensaje.getPasswordAdmin())) {
-			this.consulta="select host,timestamp from autenticaciones where username=?";
+		if (claveCorrecta(mensaje.getPasswordAdmin()) && existeUsuario(mensaje.getUsuario())) {
+			this.consulta="select host,ifnull(timestamp,now()) as timestamp from autenticaciones where username=?";
 		}
 	}
 
@@ -49,7 +49,9 @@ public class BrokerListAut implements Broker {
 					res="OK";
 				}	
 			}else {
-				
+				if  (!existeUsuario(mensaje.getUsuario())){
+					res="USUARIO INCORRECTO";
+				}
 			}
 			} catch (Exception e) {
 				res="Error de conexion";
@@ -69,6 +71,9 @@ public class BrokerListAut implements Broker {
 			
 			PreparedStatement statement=conexion.getConexion().prepareStatement(consulta);
 			rs=statement.executeQuery();
+			if (!rs.next()){
+                System.out.println("no hay registros");
+			}
 			pass=rs.getString(1);
 			
 			
@@ -77,7 +82,29 @@ public class BrokerListAut implements Broker {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return pass==passAdmin;
+		return pass.equals(passAdmin);
+	}
+	
+	public boolean existeUsuario(String usuario){
+		String consulta="select username from usuarios where username=?";
+		ResultSet rs;
+		boolean res=true;
+		try {
+			conexion.getConexion().setAutoCommit(false);
+			
+			PreparedStatement statement=conexion.getConexion().prepareStatement(consulta);
+			statement.setString(1,usuario);
+			rs=statement.executeQuery();
+			if (!rs.next()){
+                res=false;
+			}		
+			
+			conexion.getConexion().setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 }

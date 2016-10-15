@@ -32,7 +32,7 @@ public class SocketServidor extends Thread {
 			System.out.println("Mensaje recibido: "+mensajeEntrada);
 			
 			if (!mensajeEntrada.isEmpty()){
-				String host = soc.getRemoteSocketAddress().toString();
+				String host = soc.getInetAddress().toString().substring(1);
 				Parser parser = new Parser();
 				Document docEnvia = parser.xmlToDoc(mensajeEntrada);
 				Document docRecibe = parser.analizaXml(docEnvia,host);

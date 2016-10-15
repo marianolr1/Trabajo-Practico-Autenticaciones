@@ -67,6 +67,9 @@ public class BrokerModificar implements Broker {
 			PreparedStatement statement=conexion.getConexion().prepareStatement(consulta);
 			statement.setString(1,mensaje.getUsuario());
 			rs=statement.executeQuery();
+			if (!rs.next()){
+                System.out.println("no hay registros");
+			}
 			pass=rs.getString(1);
 			
 			
@@ -75,7 +78,7 @@ public class BrokerModificar implements Broker {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return pass==passAdmin;
+		return pass.equals(passAdmin);
 	}
 
 }
