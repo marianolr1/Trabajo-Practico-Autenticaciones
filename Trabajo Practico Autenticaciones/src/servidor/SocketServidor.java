@@ -9,7 +9,6 @@ import java.net.Socket;
 import org.w3c.dom.Document;
 
 import parser.Parser;
-import respuesta.Respuesta;
 
 public class SocketServidor extends Thread {
 	
