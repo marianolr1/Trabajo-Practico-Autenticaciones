@@ -1,11 +1,22 @@
 package mensajes;
-
+/**
+ * Clase encargada de instanciar los objetos de tipo Mensaje
+ */
 public class FactoryMensajes {
 	
 	public FactoryMensajes() {
 		// TODO Auto-generated constructor stub
 	}
-	
+    /**
+     * Metodo para instanciar un objeto de tipo Mensaje
+     * @param tipo String que identifica el tipo de mensaje
+     * @param usuario String Nombre de Usuario
+     * @param password String Contraseña de Usuario
+     * @param passwordAdmin String Contraseña de Administrador
+     * @param passwordNuevo String Contraseña Nueva
+     * @param host String Direccion Host del Cliente
+     * @return Mensaje Objeto de tipo Mensaje
+     */
 	public Mensaje crearMensaje(String tipo, String usuario, String password, String passwordAdmin, String passwordNuevo,String host){
 		Mensaje mensaje = null;
 	       

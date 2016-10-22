@@ -14,6 +14,10 @@ public class Conexion {
 	private final String userName;// = "root";
 	private final String password;// = "fasta";
 	private Configuracion configuracion;
+	/**
+     * Constructor privado de la clase.
+     * configuracion,  contiene los parametros de conexion leidos de un archivo de properties
+     */
 	private Conexion(){
 		configuracion= Configuracion.getInstance();
 		
@@ -27,7 +31,10 @@ public class Conexion {
 		
 		iniciarConexion();
 	}
-	
+	/**
+     * Metodo estatico para obtener la instancia de conexion, o crear una en caso de que no exista
+     * @return Variable "instancia" con la instancia de conexion
+     */
 	public static Conexion getInstance(){
 		//(String url,String port,String dbName,String name,String password){
 		if(instancia==null){

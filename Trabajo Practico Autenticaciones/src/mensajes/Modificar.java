@@ -2,7 +2,10 @@ package mensajes;
 
 import broker.*;
 import respuesta.Respuesta;
-
+/**
+ * Clase que crea un mensaje de tipo Modificar.
+ * Hereda de la clase abstracta Mensaje
+ */
 public class Modificar extends Mensaje {
 	private String usuario;
 	private String password;
@@ -12,6 +15,12 @@ public class Modificar extends Mensaje {
 	public Modificar() {
 		// TODO Auto-generated constructor stub
 	}
+    /**
+     * Constructor de la clase
+     * @param usuario Nombre de Usuario
+     * @param password Contraseña de Usuario
+     * @param passwordNuevo Nueva ContraseÃ±a
+     */
 	public Modificar(String usuario, String password, String passwordNuevo) {
 		this.usuario=usuario;
 		this.password=password;
@@ -19,9 +28,7 @@ public class Modificar extends Mensaje {
 		this.brokerModificar=new BrokerModificar(this);
 		// TODO Auto-generated constructor stub
 	}
-	public void modificarUsuario(String usuario,String password,String passwordNuevo){
-		
-	}
+
 	public String getUsuario() {
 		return usuario;
 	}
@@ -46,6 +53,10 @@ public class Modificar extends Mensaje {
 	public void setBrokerModificar(Broker brokerModificar) {
 		this.brokerModificar = brokerModificar;
 	}
+	/**
+     * Metodo que retortna la respuesta con la informacion de la base de datos
+     * @return Respuesta Objeto tipo Respuesta
+     */
 	@Override
 	public Respuesta getRespuesta() {
 		// TODO Auto-generated method stub

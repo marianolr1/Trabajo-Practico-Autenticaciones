@@ -26,11 +26,17 @@ import mensajes.Remover;
 import respuesta.Respuesta;
 
 
-
+/**
+ * Clase encargada de analizar y parsear un documento XML, convirtiendolo a texto o viceversa
+ * @author Mariano Cortinez, Pablo Cassettai
+ */
 public class Parser {
 
-	
-	// convierte un xml que vienen en un string en tipo document para poder acceder a sus etiquetas
+	/**
+     * Metodo para convertir un xml que vienen en un string a Document
+     * @param xml String a convertir
+     * @return Document Objeto de tipo document
+     */
 	public Document xmlToDoc(String xml){
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder build;
@@ -47,7 +53,11 @@ public class Parser {
 		}
 	}
 	
-	// transforma un xml en formato document a uno en formato string
+	/**
+     * Metodo para convertir un Document a String
+     * @param doc Objeto de tipo Document
+     * @return String de conversion
+     */
 	public String docToXml(Document doc){
 		StringWriter sw = new StringWriter();
 		try {
@@ -65,7 +75,13 @@ public class Parser {
 	    }
 		return sw.toString();
 	}
-	// recupero todos los datos necesarios para crear un mensaje del documento xml
+	
+	/**
+     * Metodo para analizar un documento XML, crear un objeto de tipo Mensaje 
+     * @param doc Objeto de tipo Document
+     * @param host Direccion Host del Cliente
+     * @return Document de tipo Document, para informar al cliente el resultado de la operacion
+     */
 	public Document analizaXml(Document doc,String host){
 		String tipo = null;
         String usuario = null;
@@ -130,10 +146,14 @@ public class Parser {
         factoryMje = new FactoryMensajes();
         Mensaje mensaje = factoryMje.crearMensaje(tipo, usuario, password, passwordAdmin, passwordNuevo,host);
         
-        //falta ver que hacer con el mensaje
 		return generarRespuesta(mensaje.getRespuesta(),tipo);
 	}
-	
+	/**
+     * Metodo para transformar una respuesta en tipo Document 
+     * @param respuesta Objeto de tipo Respuesta
+     * @param tipo de la respuesta
+     * @return Document de tipo Document
+     */
 	public Document generarRespuesta(Respuesta respuesta,String tipo){
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		Document doc = null;
@@ -204,6 +224,12 @@ public class Parser {
 		
 	}
 	
+	/**
+     * Metodo para crear respuesta tipo estado 
+     * @param est Estado 
+     * @param desc Descripcion de estado
+     * @return Document de tipo Document
+     */
 	public Document respuestaEstado(String est,String desc){
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		Document doc = null;
