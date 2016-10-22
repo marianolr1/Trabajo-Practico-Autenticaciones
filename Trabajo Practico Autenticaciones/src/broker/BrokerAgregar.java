@@ -22,7 +22,7 @@ public class BrokerAgregar implements Broker {
 	}
 
 	@Override
-	public Respuesta consultar() {
+	public synchronized Respuesta consultar() {
 		
 		
 		Estado respuesta=null;

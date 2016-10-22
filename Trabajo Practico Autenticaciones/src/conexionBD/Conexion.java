@@ -41,12 +41,9 @@ public class Conexion {
 		try {			
 			Class.forName(driver).newInstance();
 			conexion = DriverManager.getConnection(url+":"+port+"/"+dbName, userName, password);
-			if(!conexion.isClosed()){
-				System.out.println("Conexión establecida");
-			}
+			
 		} catch (Exception e) {
-			System.out.println("Conexión no establecida");
-			e.printStackTrace();
+			System.out.println("Conexión no establecida con el servidor de la Base de Datos");
 		}
 	}
 

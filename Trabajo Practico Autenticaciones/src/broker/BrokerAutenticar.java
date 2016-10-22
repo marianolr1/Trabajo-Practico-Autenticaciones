@@ -25,7 +25,7 @@ public class BrokerAutenticar implements Broker {
 	}
 
 	@Override
-	public Respuesta consultar() {
+	public synchronized Respuesta consultar() {
 		Estado respuesta=null;
 		String desc="";
 		String estado="ERROR";
@@ -77,7 +77,7 @@ public class BrokerAutenticar implements Broker {
 			conexion.getConexion().setAutoCommit(true);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return pass.equals(passAdmin);
 	}

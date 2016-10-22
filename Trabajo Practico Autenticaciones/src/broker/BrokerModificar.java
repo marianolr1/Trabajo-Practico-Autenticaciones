@@ -25,7 +25,7 @@ public class BrokerModificar implements Broker {
 	}
 
 	@Override
-	public Respuesta consultar() {
+	public synchronized Respuesta consultar() {
 		Estado respuesta=null;
 		String desc="";
 		String estado="ERROR";
