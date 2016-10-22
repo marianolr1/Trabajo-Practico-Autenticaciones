@@ -5,13 +5,22 @@ import java.net.Socket;
 
 import conexionBD.Configuracion;
 
-
+/**
+ * Clase principal
+ * @author Mariano Cortinez, Pablo Cassettai
+ */
 public class Servidor {
-
+	/**
+     * Metodo principal de la aplicación, el cual inicializa el servidor
+     * @param args 
+     */
 	public static void main(String[] args) {
 		new Servidor().iniciar();
 	}
-
+	
+	/**
+     * Metodo encargado de crear el socket de conexion al servidor y de esperar peticiones entrantes
+     */
 	public void iniciar(){
 		ServerSocket servidor = null;
 		Socket socket = null;

@@ -3,6 +3,10 @@ package mensajes;
 import broker.*;
 import respuesta.Respuesta;
 
+/**
+ * Clase que crea el mensaje de tipo Autenticar.
+ * Hereda de la clase abstracta Mensaje
+ */
 public class Autenticar extends Mensaje {
 	
 	private String usuario;
@@ -10,7 +14,12 @@ public class Autenticar extends Mensaje {
 	private String host;
 	private Broker brokerAutenticar;
 	
-	
+    /**
+     * Constructor de la clase
+     * @param usuario Nombre de Usuario
+     * @param password Contraseña de Usuario
+     * @param host Direccion de host del cliente
+     */
 	public Autenticar(String usuario, String password,String host) {
 		this.usuario=usuario;
 		this.password=password;

@@ -10,15 +10,28 @@ import org.w3c.dom.Document;
 
 import parser.Parser;
 
+/**
+ * Clase encargada de recibir peticiones y de leer los mensajes entrantes.
+ * Hereda de la clase Thread
+ */
 public class SocketServidor extends Thread {
 	
 	private Socket soc;
 	
+	/**
+     * Constructor de la clase
+     * @param socket Objeto de tipo socket entrante
+     */
 	public SocketServidor (Socket socket) {
 		soc = socket;
 		start(); //ejecuta lo que esta en el metodo run()
 	}
-
+	
+	
+    /**
+     * Metodo para leer un mensaje entrante, realizar las operaciones correspondientes, y luego enviar una respuesta de regreso
+     * Redefine el metodo run() de la clase Thread
+     */
 	@Override
 	public void run() {
 		

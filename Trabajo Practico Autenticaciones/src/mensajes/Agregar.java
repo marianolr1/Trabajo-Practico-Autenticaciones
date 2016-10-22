@@ -2,24 +2,34 @@ package mensajes;
 
 import broker.*;
 import respuesta.Respuesta;
-
+/**
+ * Clase que constituye el dominio del mensaje de tipo Add.
+ * Hereda de la clase abstracta Mensaje
+ */
 public class Agregar extends Mensaje {
 	private String usuario;
 	private String password;
 	private String passwordAdmin;
 	private Broker brokerAgregar;
 	
-
+    /**
+     * Constructor de la clase
+     * @param username Nombre de Usuario
+     * @param password Contraseña de Usuario
+     * @param passwordAdmin Contraseña de Administrador
+     */
 	public Agregar(String usuario, String password, String passwordAdmin) {
 		this.usuario=usuario;
 		this.password=password;
 		this.passwordAdmin=passwordAdmin;
 		this.brokerAgregar=new BrokerAgregar(this);
 	}
-	/*public void agregarUsuario(String usuario,String password,String passwordadmin){
-		
-	}*/
+
 //Region - Setters 
+	
+    /**
+     * Metodos Get y Set
+     */
 	public String getUsuario() {
 		return usuario;
 	}

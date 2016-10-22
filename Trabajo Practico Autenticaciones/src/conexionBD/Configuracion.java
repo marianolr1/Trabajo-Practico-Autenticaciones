@@ -7,6 +7,10 @@ public class Configuracion {
 
 	private Properties propiedades;
 	private static Configuracion instancia=null;
+	/**
+     * Constructor privado de la clase.
+     * Se lee el archivo properties y se cargan los parametros en "propiedades"
+     */
 	private Configuracion() {
 		try {
 			propiedades=new Properties(); 
@@ -20,7 +24,10 @@ public class Configuracion {
 		
 		
 	}
-	
+	/**
+     * Metodo estatico para obtener la instancia de Configuracion, o crear una en caso de que no exista
+     * @return Variable "instancia" con la instancia de Configuracion
+     */
 	public static Configuracion getInstance(){
 		if (instancia==null) {
 			instancia=new Configuracion();

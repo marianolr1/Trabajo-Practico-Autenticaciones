@@ -2,7 +2,10 @@ package mensajes;
 
 import broker.*;
 import respuesta.Respuesta;
-
+/**
+ * Clase que crea un mensaje de tipo MListarAutenticaciones (Listado de Autenticaciones).
+ * Hereda de la clase abstracta Mensaje
+ */
 public class MListarAutenticaciones extends Mensaje {
 
 	private String usuario;
@@ -12,6 +15,11 @@ public class MListarAutenticaciones extends Mensaje {
 	public MListarAutenticaciones() {
 		// TODO Auto-generated constructor stub
 	}
+    /**
+     * Constructor de la clase
+     * @param passwordAdmin Contraseña de Administrador
+     * @param usuario Nombre de Usuario
+     */
 	public MListarAutenticaciones(String passwordAdmin, String usuario) {
 		this.passwordAdmin = passwordAdmin;
 		this.usuario = usuario;
@@ -37,7 +45,10 @@ public class MListarAutenticaciones extends Mensaje {
 	public void setBrokerListAut(Broker brokerListAut) {
 		this.brokerListAut = brokerListAut;
 	}
-	
+	/**
+     * Metodo que retortna la respuesta con la informacion de la base de datos
+     * @return Respuesta Objeto tipo Respuesta
+     */
 	@Override
 	public Respuesta getRespuesta() {
 		// TODO Auto-generated method stub
