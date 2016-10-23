@@ -20,7 +20,11 @@ public class BrokerAgregar implements Broker {
 		}
 		
 	}
-
+    /**
+     * Metodo para guardar la respuesta en un objeto tipo Respuesta.
+     * Define el metodo consultar() de la interfaz Broker
+     * @return Respuesta objeto de tipo Respuesta que contiene el resultado de la operación correspondiente
+     */
 	@Override
 	public synchronized Respuesta consultar() {
 		
@@ -58,7 +62,10 @@ public class BrokerAgregar implements Broker {
 	
 		return respuesta;
 	}
-
+	/**
+	 * Metodo para verificar el password del administrador
+	 * @return retorna un boolean indicando si esta correcta o no la misma
+	 */
 	@Override
 	public boolean claveCorrecta(String passAdmin) {
 		String consulta="select password from usuarios where isadmin=1";
