@@ -2,6 +2,11 @@ package respuesta;
 
 import java.util.LinkedList;
 
+/**
+ * Clase que define la respuesta de tipo ListaUsuario, devolviendo una lista de todos los usuarios.
+ * Utilizada para el mensaje de tipo List-Users en caso que no haya ocurrido un error.
+ * @author Julian, Luciano, Guillermo
+ */
 public class RListarUsuarios extends Respuesta {
 
 	private LinkedList<Usuario> usuarios;
@@ -11,14 +16,17 @@ public class RListarUsuarios extends Respuesta {
 		this.usuarios=lista;
 		this.respuesta=respuesta;
 	}
-//Region - Setters/Getters
+
+	/**
+	 * Setters/Getters
+	 */
 	public LinkedList<Usuario> getUsuarios() {
 		return usuarios;
 	}
 	public void setUsuarios(LinkedList<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
-//EndRegion
+
 	public String getRespuesta() {
 		return respuesta;
 	}
