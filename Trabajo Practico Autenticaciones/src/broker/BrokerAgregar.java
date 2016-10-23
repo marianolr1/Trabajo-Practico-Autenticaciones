@@ -5,12 +5,22 @@ import mensajes.*;
 import respuesta.*;
 
 import java.sql.*;
-
+import java.util.LinkedList;
+/**
+ * Clase que define al objeto Broker del mensaje Agregar.
+ * Constituye la creacion y ejecucion de la consulta a la base de datos.
+ * Implementa a la interfaz Broker
+ * @author Mariano Cortinez, Pablo Cassettai
+ */
 public class BrokerAgregar implements Broker {
 	private String consulta="";
 	private Agregar mensaje=null;
 	private Conexion conexion;//=Conexion.getInstance();
-
+    
+	/**
+     * Constructor de la clase
+     * @param mensaje Objeto Mensaje de tipo Agregar
+     */
 	public BrokerAgregar(Agregar mensaje) {
 		this.mensaje=mensaje;
 		conexion=Conexion.getInstance();
@@ -28,11 +38,12 @@ public class BrokerAgregar implements Broker {
 	@Override
 	public synchronized Respuesta consultar() {
 		
-		
-		Estado respuesta=null;
+		Respuesta respuesta=null;
 		String desc="";
 		String estado="ERROR";
 		int resultado=0;
+		FactoryRespuesta factoryRta = new FactoryRespuesta(); 
+		
 		try {
 			
 			if (this.consulta!="") {
@@ -58,8 +69,12 @@ public class BrokerAgregar implements Broker {
 			estado="ERROR";
 			desc="Error de conexion";
 		}
-		respuesta=new Estado(estado,desc);
-	
+		//respuesta=new Estado(estado,desc);
+		
+		LinkedList<Autenticacion> lautenticaciones = null; 	// parametro no utilizado
+		LinkedList<Usuario> lusuarios  = null;				// parametro no utilizado
+		respuesta= factoryRta.crearRespuesta("ESTADO", estado, desc, lautenticaciones, lusuarios);
+		
 		return respuesta;
 	}
 	/**
@@ -84,7 +99,6 @@ public class BrokerAgregar implements Broker {
 			
 			conexion.getConexion().setAutoCommit(true);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return pass.equals(passAdmin);

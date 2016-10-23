@@ -3,7 +3,7 @@ package mensajes;
 import broker.*;
 import respuesta.Respuesta;
 /**
- * Clase que crea un mensaje de tipo MListarUsuarios (Listado de Usuarios).
+ * Clase que crea un mensaje de tipo List-Users (Listado de Usuarios).
  * Hereda de la clase abstracta Mensaje
  */
 public class MListarUsuarios extends Mensaje {
