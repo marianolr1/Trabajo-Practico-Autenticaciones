@@ -3,7 +3,7 @@ package mensajes;
 import broker.*;
 import respuesta.Respuesta;
 /**
- * Clase que crea un mensaje de tipo MListarAutenticaciones (Listado de Autenticaciones).
+ * Clase que crea un mensaje de tipo List-Aut (Listado de Autenticaciones).
  * Hereda de la clase abstracta Mensaje
  */
 public class MListarAutenticaciones extends Mensaje {
