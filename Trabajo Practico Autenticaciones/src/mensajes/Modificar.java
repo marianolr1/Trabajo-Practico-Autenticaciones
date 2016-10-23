@@ -55,7 +55,7 @@ public class Modificar extends Mensaje {
 		this.brokerModificar = brokerModificar;
 	}*/
 	/**
-     * Metodo que retortna la respuesta con la informacion de la base de datos
+     * Metodo que retorna la respuesta con la informacion de la base de datos
      * @return Respuesta Objeto tipo Respuesta
      */
 	@Override

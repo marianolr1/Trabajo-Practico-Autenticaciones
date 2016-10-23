@@ -14,7 +14,7 @@ public class RListarAutenticaciones extends Respuesta {
     /**
      * Constructor de la clase
      * @param lista Lista de Autenticaciones
-     * @param desc Descripcion de la respuesta
+     * @param respuesta Descripcion de la respuesta
      */
 	public RListarAutenticaciones(LinkedList<Autenticacion> lista,String respuesta) {
 		this.autenticaciones=lista;

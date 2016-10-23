@@ -8,8 +8,8 @@ public class FactoryRespuesta {
      * @param tipo String que identifica el tipo de respuesta
      * @param estado String Estado
      * @param desc String Descripcion
-     * @param LinkedList<Autenticacion> Listado de autenticaciones
-     * @param LinkedList<Usuario> listado de usuarios
+     * @param lautenticaciones Listado de autenticaciones
+     * @param lusuarios listado de usuarios
      * @return Respuesta Objeto de tipo Respuesta
      */
 	public Respuesta crearRespuesta(String tipo, String estado, String desc, LinkedList<Autenticacion> lautenticaciones,LinkedList<Usuario> lusuarios){

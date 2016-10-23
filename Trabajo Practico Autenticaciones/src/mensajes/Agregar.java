@@ -14,7 +14,7 @@ public class Agregar extends Mensaje {
 	
     /**
      * Constructor de la clase
-     * @param username Nombre de Usuario
+     * @param usuario Nombre de Usuario
      * @param password Contraseña de Usuario
      * @param passwordAdmin Contraseña de Administrador
      */
@@ -61,6 +61,10 @@ public class Agregar extends Mensaje {
 		this.brokerAgregar = brokerAgregar;
 	}*/
 //EndRegion
+	/**
+     * Metodo que retorna la respuesta con la informacion de la base de datos
+     * @return Respuesta Objeto tipo Respuesta
+     */
 	@Override
 	public Respuesta getRespuesta() {
 		// TODO Auto-generated method stub

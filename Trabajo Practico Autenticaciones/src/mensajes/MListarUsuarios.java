@@ -39,7 +39,7 @@ public class MListarUsuarios extends Mensaje {
 		this.brokerListUsu = brokerListUsu;
 	}*/
 	/**
-     * Metodo que retortna la respuesta con la informacion de la base de datos
+     * Metodo que retorna la respuesta con la informacion de la base de datos
      * @return Respuesta Objeto tipo Respuesta
      */
 	@Override

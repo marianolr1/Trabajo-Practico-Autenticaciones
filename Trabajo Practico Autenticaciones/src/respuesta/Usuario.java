@@ -14,7 +14,7 @@ public class Usuario {
 	/**
      * Constructor de la clase
      * @param nombreUsuario String Nombre de Usuario
-     * @param timestamp String Fecha y Horario de alta
+     * @param timeStamp String Fecha y Horario de alta
      */
 	public Usuario(String nombreUsuario, LocalDate timeStamp) {
 		this.nombreUsuario=nombreUsuario;

@@ -57,6 +57,10 @@ public class Autenticar extends Mensaje {
 	public void setBrokerAutenticar(Broker brokerAutenticar) {
 		this.brokerAutenticar = brokerAutenticar;
 	}*/
+	/**
+     * Metodo que retorna la respuesta con la informacion de la base de datos
+     * @return Respuesta Objeto tipo Respuesta
+     */
 	@Override
 	public Respuesta getRespuesta() {
 		
