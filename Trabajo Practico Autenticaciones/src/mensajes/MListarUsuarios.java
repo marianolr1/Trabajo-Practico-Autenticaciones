@@ -9,7 +9,8 @@ import respuesta.Respuesta;
 public class MListarUsuarios extends Mensaje {
 
 	private String passwordAdmin;
-	private Broker brokerListUsu;
+	
+	//private Broker brokerListUsu;
 	
 	public MListarUsuarios() {
 		// TODO Auto-generated constructor stub
@@ -20,7 +21,7 @@ public class MListarUsuarios extends Mensaje {
      */
 	public MListarUsuarios(String passwordAdmin) {
 		this.passwordAdmin = passwordAdmin;
-		this.brokerListUsu=new BrokerListUsu(this);
+		this.broker=new BrokerListUsu(this);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -30,12 +31,13 @@ public class MListarUsuarios extends Mensaje {
 	public void setPasswordAdmin(String passwordAdmin) {
 		this.passwordAdmin = passwordAdmin;
 	}
+	/*
 	public Broker getBrokerListUsu() {
 		return brokerListUsu;
 	}
 	public void setBrokerListUsu(Broker brokerListUsu) {
 		this.brokerListUsu = brokerListUsu;
-	}
+	}*/
 	/**
      * Metodo que retortna la respuesta con la informacion de la base de datos
      * @return Respuesta Objeto tipo Respuesta
@@ -43,7 +45,7 @@ public class MListarUsuarios extends Mensaje {
 	@Override
 	public Respuesta getRespuesta() {
 		// TODO Auto-generated method stub
-		return brokerListUsu.consultar();
+		return broker.consultar();
 	}
 
 }

@@ -9,7 +9,8 @@ import respuesta.Respuesta;
 public class Remover extends Mensaje {
 	private String usuario;
 	private String passwordAdmin;
-	private Broker brokerRemover;
+	
+	//private Broker brokerRemover;
 	
     /**
      * Constructor de la clase
@@ -19,7 +20,7 @@ public class Remover extends Mensaje {
 	public Remover(String usuario, String passwordAdmin) {
 		this.usuario=usuario;
 		this.passwordAdmin=passwordAdmin;
-		this.brokerRemover=new BrokerRemover(this);
+		this.broker=new BrokerRemover(this);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -35,12 +36,13 @@ public class Remover extends Mensaje {
 	public void setPasswordAdmin(String passwordAdmin) {
 		this.passwordAdmin = passwordAdmin;
 	}
+	/*
 	public Broker getBrokerRemover() {
 		return brokerRemover;
 	}
 	public void setBrokerRemover(Broker brokerRemover) {
 		this.brokerRemover = brokerRemover;
-	}
+	}*/
 	/**
      * Metodo que retortna la respuesta con la informacion de la base de datos
      * @return Respuesta Objeto tipo Respuesta
@@ -48,7 +50,7 @@ public class Remover extends Mensaje {
 	@Override
 	public Respuesta getRespuesta() {
 		// TODO Auto-generated method stub
-		return brokerRemover.consultar();
+		return broker.consultar();
 	}
 
 }

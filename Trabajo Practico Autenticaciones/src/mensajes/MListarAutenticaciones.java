@@ -10,7 +10,8 @@ public class MListarAutenticaciones extends Mensaje {
 
 	private String usuario;
 	private String passwordAdmin;
-	private Broker brokerListAut;
+	
+	//private Broker brokerListAut;
 	
 	public MListarAutenticaciones() {
 		// TODO Auto-generated constructor stub
@@ -23,7 +24,7 @@ public class MListarAutenticaciones extends Mensaje {
 	public MListarAutenticaciones(String passwordAdmin, String usuario) {
 		this.passwordAdmin = passwordAdmin;
 		this.usuario = usuario;
-		this.brokerListAut=new BrokerListAut(this);
+		this.broker=new BrokerListAut(this);
 		// TODO Auto-generated constructor stub
 	}
 	public String getUsuario() {
@@ -38,13 +39,13 @@ public class MListarAutenticaciones extends Mensaje {
 	public void setPasswordAdmin(String passwordAdmin) {
 		this.passwordAdmin = passwordAdmin;
 	}
-	
+	/*
 	public Broker getBrokerListAut() {
 		return brokerListAut;
 	}
 	public void setBrokerListAut(Broker brokerListAut) {
 		this.brokerListAut = brokerListAut;
-	}
+	}*/
 	/**
      * Metodo que retortna la respuesta con la informacion de la base de datos
      * @return Respuesta Objeto tipo Respuesta
@@ -52,6 +53,6 @@ public class MListarAutenticaciones extends Mensaje {
 	@Override
 	public Respuesta getRespuesta() {
 		// TODO Auto-generated method stub
-		return brokerListAut.consultar();
+		return broker.consultar();
 	}
 }

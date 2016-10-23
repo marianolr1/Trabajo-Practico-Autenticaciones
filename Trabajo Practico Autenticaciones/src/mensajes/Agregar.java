@@ -10,7 +10,7 @@ public class Agregar extends Mensaje {
 	private String usuario;
 	private String password;
 	private String passwordAdmin;
-	private Broker brokerAgregar;
+	//private Broker brokerAgregar;
 	
     /**
      * Constructor de la clase
@@ -22,7 +22,7 @@ public class Agregar extends Mensaje {
 		this.usuario=usuario;
 		this.password=password;
 		this.passwordAdmin=passwordAdmin;
-		this.brokerAgregar=new BrokerAgregar(this);
+		this.broker=new BrokerAgregar(this);
 	}
 
 //Region - Setters 
@@ -53,17 +53,18 @@ public class Agregar extends Mensaje {
 	public void setPasswordAdmin(String passwordAdmin) {
 		this.passwordAdmin = passwordAdmin;
 	}
+	/*COMENTADO 23/10
 	public Broker getBrokerAgregar() {
 		return brokerAgregar;
 	}
 	public void setBrokerAgregar(Broker brokerAgregar) {
 		this.brokerAgregar = brokerAgregar;
-	}
+	}*/
 //EndRegion
 	@Override
 	public Respuesta getRespuesta() {
 		// TODO Auto-generated method stub
-		return brokerAgregar.consultar();
+		return broker.consultar();
 	}
 	
 }

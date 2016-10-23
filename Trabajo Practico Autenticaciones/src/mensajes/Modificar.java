@@ -10,7 +10,7 @@ public class Modificar extends Mensaje {
 	private String usuario;
 	private String password;
 	private String passwordNuevo;
-	private Broker brokerModificar;
+	//private Broker brokerModificar;
 	
 	public Modificar() {
 		// TODO Auto-generated constructor stub
@@ -25,7 +25,7 @@ public class Modificar extends Mensaje {
 		this.usuario=usuario;
 		this.password=password;
 		this.passwordNuevo=passwordNuevo;
-		this.brokerModificar=new BrokerModificar(this);
+		this.broker=new BrokerModificar(this);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -47,12 +47,13 @@ public class Modificar extends Mensaje {
 	public void setPasswordNuevo(String passwordNuevo) {
 		this.passwordNuevo = passwordNuevo;
 	}
+	/*
 	public Broker getBrokerModificar() {
 		return brokerModificar;
 	}
 	public void setBrokerModificar(Broker brokerModificar) {
 		this.brokerModificar = brokerModificar;
-	}
+	}*/
 	/**
      * Metodo que retortna la respuesta con la informacion de la base de datos
      * @return Respuesta Objeto tipo Respuesta
@@ -60,7 +61,7 @@ public class Modificar extends Mensaje {
 	@Override
 	public Respuesta getRespuesta() {
 		// TODO Auto-generated method stub
-		return brokerModificar.consultar();
+		return broker.consultar();
 	}
 
 }

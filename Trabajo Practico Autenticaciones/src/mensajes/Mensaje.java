@@ -1,5 +1,6 @@
 package mensajes;
 
+import broker.Broker;
 import respuesta.Respuesta;
 
 /**
@@ -7,7 +8,10 @@ import respuesta.Respuesta;
  * @author Mariano Cortinez, Pablo Cassettai
  */
 public abstract class Mensaje {
-
+	
+	//AGREGADO 23/10
+	protected Broker broker;
+	
 	public Mensaje() {
 		// TODO Auto-generated constructor stub
 	}
@@ -16,6 +20,12 @@ public abstract class Mensaje {
      * @return Respuesta Objeto de tipo Respuesta
      */
 	public abstract Respuesta getRespuesta();
+	public Broker getBroker() {
+		return broker;
+	}
+	public void setBroker(Broker broker) {
+		this.broker = broker;
+	}
 	
 
 }

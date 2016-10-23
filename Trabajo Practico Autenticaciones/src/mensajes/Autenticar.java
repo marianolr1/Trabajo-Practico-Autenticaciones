@@ -12,7 +12,9 @@ public class Autenticar extends Mensaje {
 	private String usuario;
 	private String password;
 	private String host;
-	private Broker brokerAutenticar;
+	
+	
+	//private Broker brokerAutenticar;
 	
     /**
      * Constructor de la clase
@@ -23,7 +25,7 @@ public class Autenticar extends Mensaje {
 	public Autenticar(String usuario, String password,String host) {
 		this.usuario=usuario;
 		this.password=password;
-		this.brokerAutenticar=new BrokerAutenticar(this);
+		this.broker=new BrokerAutenticar(this);
 		this.host=host;
 		// TODO Auto-generated constructor stub
 	}
@@ -48,16 +50,17 @@ public class Autenticar extends Mensaje {
 	public void setHost(String host) {
 		this.host = host;
 	}
+	/*
 	public Broker getBrokerAutenticar() {
 		return brokerAutenticar;
 	}
 	public void setBrokerAutenticar(Broker brokerAutenticar) {
 		this.brokerAutenticar = brokerAutenticar;
-	}
+	}*/
 	@Override
 	public Respuesta getRespuesta() {
 		
-		return brokerAutenticar.consultar();
+		return broker.consultar();
 	}
 
 }
