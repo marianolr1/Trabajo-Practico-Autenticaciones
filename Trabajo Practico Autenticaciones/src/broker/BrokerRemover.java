@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import conexionBD.Conexion;
 import mensajes.*;
 import respuesta.Autenticacion;
-import respuesta.Estado;
 import respuesta.FactoryRespuesta;
 import respuesta.Respuesta;
 import respuesta.Usuario;
