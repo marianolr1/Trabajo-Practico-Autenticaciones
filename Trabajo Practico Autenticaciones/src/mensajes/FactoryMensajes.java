@@ -5,7 +5,7 @@ package mensajes;
 public class FactoryMensajes {
 	
 	public FactoryMensajes() {
-		// TODO Auto-generated constructor stub
+		
 	}
     /**
      * Metodo para instanciar un objeto de tipo Mensaje

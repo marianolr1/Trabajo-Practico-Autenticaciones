@@ -67,7 +67,6 @@ public class Agregar extends Mensaje {
      */
 	@Override
 	public Respuesta getRespuesta() {
-		// TODO Auto-generated method stub
 		return broker.consultar();
 	}
 	

@@ -21,7 +21,6 @@ public class Remover extends Mensaje {
 		this.usuario=usuario;
 		this.passwordAdmin=passwordAdmin;
 		this.broker=new BrokerRemover(this);
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getUsuario() {
@@ -49,7 +48,6 @@ public class Remover extends Mensaje {
      */
 	@Override
 	public Respuesta getRespuesta() {
-		// TODO Auto-generated method stub
 		return broker.consultar();
 	}
 

@@ -13,7 +13,7 @@ public class Modificar extends Mensaje {
 	//private Broker brokerModificar;
 	
 	public Modificar() {
-		// TODO Auto-generated constructor stub
+		
 	}
     /**
      * Constructor de la clase
@@ -26,7 +26,6 @@ public class Modificar extends Mensaje {
 		this.password=password;
 		this.passwordNuevo=passwordNuevo;
 		this.broker=new BrokerModificar(this);
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getUsuario() {
@@ -60,7 +59,6 @@ public class Modificar extends Mensaje {
      */
 	@Override
 	public Respuesta getRespuesta() {
-		// TODO Auto-generated method stub
 		return broker.consultar();
 	}
 

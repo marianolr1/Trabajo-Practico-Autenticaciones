@@ -15,7 +15,7 @@ import java.util.LinkedList;
 public class BrokerAgregar implements Broker {
 	private String consulta="";
 	private Agregar mensaje=null;
-	private Conexion conexion;//=Conexion.getInstance();
+	private Conexion conexion;
     
 	/**
      * Constructor de la clase

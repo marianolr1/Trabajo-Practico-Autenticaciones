@@ -27,7 +27,6 @@ public class Autenticar extends Mensaje {
 		this.password=password;
 		this.broker=new BrokerAutenticar(this);
 		this.host=host;
-		// TODO Auto-generated constructor stub
 	}
 	public void autenticarUsuario(String usuario,String password){
 		

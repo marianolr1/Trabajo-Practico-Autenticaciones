@@ -102,8 +102,7 @@ public class BrokerAutenticar implements Broker {
 			
 			conexion.getConexion().setAutoCommit(true);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
+			
 		}
 		return pass.equals(passAdmin);
 	}

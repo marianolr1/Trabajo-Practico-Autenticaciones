@@ -7,12 +7,12 @@ public class Conexion {
 
 	private static Conexion instancia=null;
 	private Connection conexion;
-	private final String url;// = "jdbc:mysql://Profe02";//"jdbc:mysql://localhost";
-	private final String port;// ="3306";
-	private final String dbName;// = "test";
-	private final String driver;// = "com.mysql.jdbc.Driver";//agregar en config
-	private final String userName;// = "root";
-	private final String password;// = "fasta";
+	private final String url;
+	private final String port;
+	private final String dbName;
+	private final String driver;
+	private final String userName;
+	private final String password;
 	private Configuracion configuracion;
 	/**
      * Constructor privado de la clase.
@@ -20,8 +20,6 @@ public class Conexion {
      */
 	private Conexion(){
 		configuracion= Configuracion.getInstance();
-		
-		//(String url,String port,String dbName,String userName,String password) {
 		this.driver=configuracion.getPropiedades().getProperty("driver");
 		this.url=configuracion.getPropiedades().getProperty("url");
 		this.port=configuracion.getPropiedades().getProperty("port");
@@ -36,9 +34,8 @@ public class Conexion {
      * @return Variable "instancia" con la instancia de conexion
      */
 	public static Conexion getInstance(){
-		//(String url,String port,String dbName,String name,String password){
 		if(instancia==null){
-			instancia= new Conexion();//(url,port,dbName,name,password);
+			instancia= new Conexion();
 		}
 		return instancia;
 		

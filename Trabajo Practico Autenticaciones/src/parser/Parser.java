@@ -183,7 +183,6 @@ public class Parser {
 				
 				
 			} catch (ParserConfigurationException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         	return doc;
@@ -211,7 +210,7 @@ public class Parser {
 				}
 				doc.appendChild(element); 
 			} catch (Exception e) {
-				// TODO: handle exception
+				
 			}
             return doc;
         default:
@@ -247,7 +246,6 @@ public class Parser {
 			
 			
 		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	return doc;

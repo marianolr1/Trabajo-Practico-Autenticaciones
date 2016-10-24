@@ -14,7 +14,7 @@ public class MListarAutenticaciones extends Mensaje {
 	//private Broker brokerListAut;
 	
 	public MListarAutenticaciones() {
-		// TODO Auto-generated constructor stub
+		
 	}
     /**
      * Constructor de la clase
@@ -25,7 +25,7 @@ public class MListarAutenticaciones extends Mensaje {
 		this.passwordAdmin = passwordAdmin;
 		this.usuario = usuario;
 		this.broker=new BrokerListAut(this);
-		// TODO Auto-generated constructor stub
+		
 	}
 	public String getUsuario() {
 		return usuario;
@@ -52,7 +52,6 @@ public class MListarAutenticaciones extends Mensaje {
      */
 	@Override
 	public Respuesta getRespuesta() {
-		// TODO Auto-generated method stub
 		return broker.consultar();
 	}
 }

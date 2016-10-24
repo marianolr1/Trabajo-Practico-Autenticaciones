@@ -13,7 +13,7 @@ public abstract class Mensaje {
 	protected Broker broker;
 	
 	public Mensaje() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	/**
      * Metodo abstracto para obtener el objeto de tipo Respuesta
