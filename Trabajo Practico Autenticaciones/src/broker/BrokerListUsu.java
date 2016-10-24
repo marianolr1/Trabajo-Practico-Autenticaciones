@@ -69,7 +69,7 @@ public class BrokerListUsu implements Broker {
 				e.printStackTrace();
 				res="Error de conexion";
 		}
-		respuesta=new RListarUsuarios(lista,res);
+		//respuesta=new RListarUsuarios(lista,res);
 		
 		LinkedList<Autenticacion> lautenticaciones = null; 	// parametro no utilizado
 		String estado = null;								// parametro no utilizado 
