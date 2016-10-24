@@ -149,9 +149,13 @@ public class Controlador {
 			cliente = new Cliente();  
 		
 		}
-		cliente.creaSocket(ip, puerto);
+		if (cliente.creaSocket(ip, puerto)) {
+			return true;
+		} else {
+			return false;
+		}
 
-		return cliente!=null;
+		//return cliente!=null;
         
 	}
 	public JTextArea enviarMensaje(String mensaje, JTextArea taConsola){

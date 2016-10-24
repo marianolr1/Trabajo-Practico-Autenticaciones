@@ -17,16 +17,18 @@ public class Cliente {
 		//creaSocket(ip,puerto);
 	}
     
-    public void creaSocket(String ip,int puerto) {
+    public boolean creaSocket(String ip,int puerto) {
         
 //	        BufferedReader in2;
         
         try {
             socket = new Socket(ip,puerto);
-            
+            return true;
           
         } catch (Exception e) {
-            e.printStackTrace();
+        	System.out.println("Verifique que el servidor este funcionando");
+        	return false;
+            //e.printStackTrace();
         }
     }
     public JTextArea enviaMensaje(String mensaje,JTextArea taConsola){

@@ -264,6 +264,8 @@ public class FormCliente extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (controlador.conectar(tfIpServidor.getText(),Integer.parseInt(tfPuerto.getText()))) {
 					taConsola.append("Conexion establecida \n");
+				}else {
+					taConsola.append("Verifique que el servidor este funcionando \n");
 				}
 				
 			}
